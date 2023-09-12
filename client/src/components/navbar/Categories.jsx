@@ -1,29 +1,23 @@
-import Container from "../Container";
+import Container from '../Container';
 
-import { FaToilet, FaBed } from "react-icons/fa";
-import { LuParkingCircle } from "react-icons/lu";
-import { BiDevices } from "react-icons/bi";
+import { FaBed, FaHospitalSymbol } from 'react-icons/fa';
+import { BiSolidAmbulance } from 'react-icons/bi';
 
 const categories = [
   {
     id: 1,
-    title: "Toilets",
-    icon: FaToilet,
+    title: 'Ambulance',
+    icon: BiSolidAmbulance,
   },
   {
     id: 2,
-    title: "Rooms",
-    icon: FaBed,
+    title: 'Hospitals',
+    icon: FaHospitalSymbol,
   },
   {
     id: 3,
-    title: "Parking",
-    icon: LuParkingCircle,
-  },
-  {
-    id: 4,
-    title: "Items",
-    icon: BiDevices,
+    title: 'Nearest Hospital',
+    icon: FaBed,
   },
 ];
 
@@ -40,7 +34,7 @@ const Categories = () => {
                 border rounded-full 
                 px-3 py-1
                 cursor-pointer
-                hover:bg-white hover:text-[#a3270e]
+                hover:bg-white hover:text-[#c53434]
                 transition ease duration-500
               "
             >

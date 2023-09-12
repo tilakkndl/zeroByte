@@ -1,14 +1,11 @@
-"use client";
+import { useState } from 'react';
 
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineMenu } from 'react-icons/ai';
 
-import MenuItem from "@/components/navbar/MenuItem";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import MenuItem from '../navbar/MenuItem';
 
 const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <div className="relative ">
@@ -29,23 +26,26 @@ const NavMenu = () => {
             w-[40vw] max-w-[380px] min-w-[180px]
             overflow-hidden text-sm
             transition duration-500 ease-in-out
-            ${isOpen ? "translate-y-0" : "-translate-y-80"}
+            ${isOpen ? 'translate-y-0' : '-translate-y-80'}
           `}
       >
         <div className="flex flex-col cursor-pointer">
           <>
             <div className="md:hidden">
               <MenuItem
-                onClick={() => router.push("/signin")}
+                // onClick={() => router.push('/signin')}
                 label="Sign in"
               />
               <MenuItem
-                onClick={() => router.push("/signup")}
+                // onClick={() => router.push('/signup')}
                 label="Sign up"
               />
             </div>
             <hr />
-            <MenuItem onClick={() => router.push("/")} label="Home" />
+            <MenuItem
+              // onClick={() => router.push('/')}
+              label="Home"
+            />
             <MenuItem onClick={() => {}} label="Help" />
           </>
         </div>

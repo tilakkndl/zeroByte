@@ -1,5 +1,3 @@
-"use client";
-
 const MenuItem = ({ onClick, label }) => {
   return (
     <div

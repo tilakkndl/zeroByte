@@ -1,11 +1,4 @@
-"use client";
-
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-
 const Logo = () => {
-  const router = useRouter();
-
   return (
     <>
       {/* <Image
@@ -26,12 +19,12 @@ const Logo = () => {
       /> */}
       <div
         className="
-          text-2xl font-bold -tracking-tighter
+          text-lg md:text-2xl font-bold -tracking-tighter
           cursor-pointer
         "
-        onClick={() => router.push("/")}
+        // onClick={() => router.push('/')}
       >
-        Logo
+        AmbuConnect
       </div>
     </>
   );

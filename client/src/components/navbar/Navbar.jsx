@@ -1,14 +1,10 @@
-import Container from "@/components/Container";
-import Categories from "@/components/navbar/Categories";
-import Logo from "@/components/navbar/Logo";
-import Search from "@/components/navbar/Search";
-import NavMenu from "@/components/navbar/NavMenu";
-
-import { useRouter } from "next/navigation";
+import Container from '../Container';
+import Logo from '../navbar/Logo';
+import Search from '../navbar/Search';
+import NavMenu from '../navbar/NavMenu';
+import Categories from '../navbar/Categories';
 
 const Navbar = () => {
-  const router = useRouter();
-
   return (
     <nav className="w-full z-10 shadow-sm bg-[#c53434] text-white">
       <div className="py-4">
@@ -37,7 +33,7 @@ const Navbar = () => {
                     after:origin-[0%_50%]
                     hover:text-primary-color
                   "
-                  onClick={() => router.push("/signin")}
+                  // onClick={() => router.push('/signin')}
                 >
                   Sign In
                 </li>
@@ -50,7 +46,7 @@ const Navbar = () => {
                     after:origin-[0%_50%]
                     hover:text-primary-color
                 "
-                  onClick={() => router.push("/signup")}
+                  // onClick={() => router.push('/signup')}
                 >
                   Sign Up
                 </li>
@@ -70,15 +66,18 @@ const Navbar = () => {
           text-lg sm:text-xl md:text-2xl font-bold -tracking-tighter pb-4
         "
         >
-          Unlock Endless Possibilities: Rent Anything, Anywhere!
+          AmbuConnect: Real-Time Ambulance Locator and Dispatch Service
         </h2>
         <h5
           className="
-            text-xs sm:text-sm md:text-base font-semibold -tracking-tight pb-16
+            text-xs sm:text-sm md:text-base -tracking-tight 
+            pb-16 max-w-[1080px]
           "
         >
-          Discover a Diverse Community of Renters and Providers, Making Renting
-          Easier Than Ever
+          Welcome to Ambulance Locator, your trusted platform to quickly locate
+          and dispatch ambulances to emergencies. We connect you with the
+          nearest ambulance services to ensure timely assistance during critical
+          moments.
         </h5>
       </Container>
     </nav>
