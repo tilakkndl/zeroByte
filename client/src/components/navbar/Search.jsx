@@ -18,14 +18,14 @@ const Search = () => {
           <input
             type="text"
             className="
-              w-full px-4 py-2 rounded-l-full text-sm md:text-lg text-black
+              w-full px-4 py-2 rounded-l-full text-sm md:text-lg text-text-secondary-color
             "
           />
         </div>
         <div
           className="
             p-2 md:px-4 md:py-3 
-            rounded-r-full bg-[#6e121d] text-white
+            rounded-r-full bg-secondary-color text-white
           "
         >
           <BiSearch size={20} />
@@ -55,10 +55,10 @@ const Search = () => {
             <div className="w-full">
               <input
                 type="text"
-                className="w-full p-3 rounded-l-full text-sm md:text-lg text-black"
+                className="w-full p-3 rounded-l-full text-sm md:text-lg text-text-secondary-color"
               />
             </div>
-            <div className="p-3 rounded-r-full bg-[#6e121d] text-white">
+            <div className="p-3 rounded-r-full bg-secondary-color text-white">
               <BiSearch size={20} />
             </div>
           </div>

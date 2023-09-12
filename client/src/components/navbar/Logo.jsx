@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Logo = () => {
   return (
     <>
@@ -17,15 +19,16 @@ const Logo = () => {
         width="33"
         src="/images/mobile-logo.png"
       /> */}
-      <div
-        className="
-          text-lg md:text-2xl font-bold -tracking-tighter
-          cursor-pointer
-        "
-        // onClick={() => router.push('/')}
-      >
-        AmbuConnect
-      </div>
+      <Link to={'/'}>
+        <div
+          className="
+            text-lg md:text-2xl font-bold -tracking-tighter
+            cursor-pointer
+          "
+        >
+          AmbuConnect
+        </div>
+      </Link>
     </>
   );
 };

@@ -1,11 +1,11 @@
 import Navbar from '../components/navbar/Navbar';
 
-const Home = () => {
+const SignIn = () => {
   return (
     <div>
-      <Navbar categories bottom menu search />
+      <Navbar secondary signIn />
     </div>
   );
 };
 
-export default Home;
+export default SignIn;

@@ -4,7 +4,7 @@ const MenuItem = ({ onClick, label }) => {
       onClick={onClick}
       className="
         px-4 py-3 
-        hover:bg-neutral-100 transition 
+        hover:bg-red-50 transition 
         font-semibold text-base
       "
     >
