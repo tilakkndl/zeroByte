@@ -1,9 +1,7 @@
-import "./App.css";
-
 function App() {
   return (
     <>
-      <main>MainPage</main>
+      <main className="bg-red-500">MainPage</main>
     </>
   );
 }
