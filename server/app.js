@@ -1,12 +1,12 @@
-const express = require("express")
-const morgan = require("morgan")
-const app = express()
+const express = require('express');
+const morgan = require('morgan');
+const app = express();
 
 // const userRouter = require("./route/userRoute")
-const userRouter = require("./route/userRoute")
+const userRouter = require('./route/userRoute');
 //MIDDLEWARE
-// app.use(express.json())
-// app.use(morgan("dev"))
+app.use(express.json());
+app.use(morgan('dev'));
 
 // app.use((req, res, next)=>{
 //     console.log("Hello from MIDDLEWARE")
@@ -16,7 +16,6 @@ const userRouter = require("./route/userRoute")
 //     next()
 // })
 
-app.use("/api/v1/users/", userRouter)
-
+app.use('/api/v1/users/', userRouter);
 
 module.exports = app;
