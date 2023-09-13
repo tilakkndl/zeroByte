@@ -22,11 +22,19 @@ const Logo = () => {
       <Link to={'/'}>
         <div
           className="
-            text-lg md:text-2xl font-bold -tracking-tighter
-            cursor-pointer 
+            text-2xl font-bold -tracking-tighter
+            cursor-pointer hidden md:block
           "
         >
           AmbuConnect
+        </div>
+        <div
+          className="
+            text-2xl font-bold -tracking-tighter
+            cursor-pointer md:hidden
+          "
+        >
+          AC
         </div>
       </Link>
     </>
