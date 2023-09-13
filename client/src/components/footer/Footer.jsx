@@ -18,13 +18,11 @@ const widgets = [
 
 const Footer = () => {
   return (
-    <div className="">
-      <div className="bg-[#151414] text-[#757575]">
-        <Container>
-          <FooterInfo />
-          <FooterLinks widgets={widgets} />
-        </Container>
-      </div>
+    <div className="w-full mt-20 bg-[#151414] text-[#757575]">
+      <Container>
+        <FooterInfo />
+        <FooterLinks widgets={widgets} />
+      </Container>
       <Copyright />
     </div>
   );

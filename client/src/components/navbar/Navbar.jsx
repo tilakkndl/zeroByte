@@ -15,7 +15,7 @@ const Navbar = ({
   return (
     <nav
       className={`
-        w-full z-10 shadow-sm py-4
+        w-full z-10 shadow-sm pt-4 pb-12
         ${
           secondary
             ? 'text-primary-color'

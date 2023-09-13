@@ -6,7 +6,7 @@ const FooterLinks = ({ widgets }) => {
   return (
     <div className="flex flex-wrap flex-col sm:flex-row gap-4 py-4">
       <div className="max-w-[400px] flex flex-col gap-3">
-        <div className="text-text-primary-color">
+        <div className="text-text-primary-color mb-7">
           <Logo />
         </div>
         <p className="text-sm">
