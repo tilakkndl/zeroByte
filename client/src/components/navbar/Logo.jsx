@@ -23,7 +23,7 @@ const Logo = () => {
         <div
           className="
             text-lg md:text-2xl font-bold -tracking-tighter
-            cursor-pointer
+            cursor-pointer 
           "
         >
           AmbuConnect
