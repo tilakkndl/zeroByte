@@ -5,7 +5,10 @@ export const loginValidation = Yup.object({
     .required('Email address is required.')
     .email('Please enter a valid address.'),
 
-  login_password: Yup.string().required('Please enter a password.'),
+  login_password: Yup.string()
+    .required('Please enter a password.')
+    .min(8, 'Password must be atleast 6 characters.')
+    .max(36, "Password can't be more than 36 characters."),
 });
 
 export const registerValidation = Yup.object({
