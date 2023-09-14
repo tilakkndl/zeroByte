@@ -1,10 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Logo from '../Logo';
 import NavMenu from '../NavMenu';
 import Search from '../Search';
 
 const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
+
+  const userInfo = useSelector((state) => state.userInfo);
+  console.log(userInfo);
+
   return (
     <div className="flex flex-row justify-between items-center gap-4">
       {menu && (
@@ -17,12 +24,17 @@ const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
         {search && <Search />}
         {!secondary && (
           <ul className="hidden md:flex gap-3 ">
-            <Link to={'/signIn'}>
-              <li className="text-lg hover-slider">Sign In</li>
-            </Link>
-            <Link to={'/signUp'}>
-              <li className="text-lg hover-slider">Sign Up</li>
-            </Link>
+            {token && (
+              <li
+                className="text-lg hover-slider"
+                onClick={() => {
+                  localStorage.removeItem('token');
+                  navigate('/');
+                }}
+              >
+                Sign Out
+              </li>
+            )}
           </ul>
         )}
         {signIn && (

@@ -1,19 +1,21 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { setUser } from '../../store/slices/userSlice';
 import { loginValidation } from './schemas';
 import Container from '../Container';
 import Button from '../Button';
 import Input from './Input';
-import { setUser } from '../../store/slices/userSlice';
 
 const SignInModal = () => {
-  const user = useSelector((state) => state.user);
-  const { login_email: email, login_password: password } = user;
   const [error, setError] = useState(false);
+
+  const user = useSelector((state) => state.user);
+
+  const { login_email: email, login_password: password } = user;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,21 +26,24 @@ const SignInModal = () => {
 
   const handleSignIn = async () => {
     console.log('Signing in...');
-    const data = await axios
+    await axios
       .post('http://localhost:5000/api/v1/users/login', {
         email,
         password,
       })
       .then((res) => {
+        const data = res.data;
+        const token = data.token;
+        const { name, email } = data.user;
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('data', JSON.stringify({ name, email }));
         navigate('/');
-        return res;
       })
       .catch((err) => {
         setError(true);
         console.log(err);
       });
-
-    console.log(data);
   };
 
   return (
@@ -56,7 +61,7 @@ const SignInModal = () => {
               Registered Customers
             </h3>
             {error && (
-              <h1 className="text-red-600 font-bold bg-slate-100 px-2 py-4">
+              <h1 className="text-red-600 font-bold bg-slate-100 px-2 py-4 mb-4">
                 Sign In Unsucessful. Please check your email or password and try
                 again!!
               </h1>
@@ -95,7 +100,7 @@ const SignInModal = () => {
             </Formik>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center gap-4 mt-4 text-base text-accent-color font-semibold">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4 text-base text-accent-color font-semibold">
           <div className="cursor-pointer flex gap-2">
             <span>Create New Account ?</span>
             <Link to={'/signup'} className="text-primary-color">

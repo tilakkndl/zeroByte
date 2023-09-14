@@ -3,10 +3,13 @@ import { useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import MenuItem from '../navbar/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   return (
     <div className="relative">
@@ -33,12 +36,15 @@ const NavMenu = () => {
         <div className="flex flex-col cursor-pointer">
           <>
             <div className="md:hidden">
-              <Link to={`/signIn`}>
-                <MenuItem label="Sign in" />
-              </Link>
-              <Link to={`/signUp`}>
-                <MenuItem label="Sign up" />
-              </Link>
+              {token && (
+                <MenuItem
+                  label="Sign Out"
+                  onClick={() => {
+                    localStorage.removeItem('token');
+                    navigate('/');
+                  }}
+                />
+              )}
             </div>
             <hr />
             <Link to={`/`}>

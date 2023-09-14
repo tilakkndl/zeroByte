@@ -9,11 +9,11 @@ import Button from '../Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
+import { setUserInfo } from '../../store/slices/userInfoSlice';
 
 const SignUpModal = () => {
   const user = useSelector((state) => state.user);
   const [error, setError] = useState(false);
-  const [sucess, setSucess] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -54,7 +54,6 @@ const SignUpModal = () => {
         passwordConfirm,
       })
       .then((res) => {
-        setSucess(true);
         setError(false);
 
         //login the user
@@ -65,6 +64,8 @@ const SignUpModal = () => {
           })
           .then((res) => {
             navigate('/');
+            const data = res.data;
+            dispatch(setUserInfo({ data }));
             return res;
           })
           .catch((err) => {
@@ -75,7 +76,6 @@ const SignUpModal = () => {
         return res.data;
       })
       .catch((err) => {
-        setSucess(false);
         setError(true);
         console.log(err);
         return null;
@@ -100,18 +100,6 @@ const SignUpModal = () => {
           {error && (
             <h1 className="text-red-600 font-bold bg-slate-100 px-2 py-4">
               Register Unsucessful. Please try again!!
-            </h1>
-          )}
-          {sucess && (
-            <h1 className="text-green-600 font-bold bg-slate-100 px-2 py-4">
-              Register Sucessful. Please{' '}
-              <Link
-                to={'/signin'}
-                className="border-b-2 border-green-600 text-green-800"
-              >
-                Sign in
-              </Link>{' '}
-              to continue
             </h1>
           )}
           <Formik
@@ -170,8 +158,7 @@ const SignUpModal = () => {
       </div>
       <div
         className="
-            flex flex-col md:flex-row 
-            items-center justify-center gap-4 
+            flex items-center justify-center gap-4 
             mt-4 text-base font-semibold
         "
       >
