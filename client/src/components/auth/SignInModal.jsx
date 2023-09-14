@@ -1,23 +1,45 @@
 import { useState } from 'react';
 import { Formik, Form } from 'formik';
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { loginValidation } from './schemas';
 import Container from '../Container';
 import Button from '../Button';
 import Input from './Input';
+import { setUser } from '../../store/slices/userSlice';
 
 const SignInModal = () => {
-  const [user, setUser] = useState({
-    email: '',
-    password: '',
-  });
+  const user = useSelector((state) => state.user);
+  const { login_email: email, login_password: password } = user;
+  const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    dispatch(setUser({ ...user, [e.target.name]: e.target.value }));
   };
-  const handleSignIn = () => {};
+
+  const handleSignIn = async () => {
+    console.log('Signing in...');
+    const data = await axios
+      .post('http://localhost:5000/api/v1/users/login', {
+        email,
+        password,
+      })
+      .then((res) => {
+        navigate('/');
+        return res;
+      })
+      .catch((err) => {
+        setError(true);
+        console.log(err);
+      });
+
+    console.log(data);
+  };
 
   return (
     <Container>
@@ -33,20 +55,24 @@ const SignInModal = () => {
             >
               Registered Customers
             </h3>
+            {error && (
+              <h1 className="text-red-600 font-bold bg-slate-100 px-2 py-4">
+                Sign In Unsucessful. Please check your email or password and try
+                again!!
+              </h1>
+            )}
             <Formik
               enableReinitialize
               initialValues={user}
               validationSchema={loginValidation}
-              onSubmit={() => {
-                handleSignIn();
-              }}
+              onSubmit={handleSignIn}
             >
               {({ errors, handleBlur, touched }) => (
                 <Form>
                   <Input
                     label="Email"
                     type="text"
-                    name="email"
+                    name="login_email"
                     placeholder="Email Address"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -56,7 +82,7 @@ const SignInModal = () => {
                   <Input
                     label="Password"
                     type="password"
-                    name="password"
+                    name="login_password"
                     placeholder="Password"
                     onChange={handleChange}
                     onBlur={handleBlur}

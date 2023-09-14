@@ -26,7 +26,7 @@ const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
           </ul>
         )}
         {signIn && (
-          <ul className="flex gap-3 ">
+          <ul className="flex items-center gap-2 md:gap-3 ">
             <li className="text-base text-text-secondary-color">
               <b>New User ?</b>
             </li>
@@ -36,8 +36,8 @@ const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
           </ul>
         )}
         {signUp && (
-          <ul className="flex gap-3 ">
-            <li className="text-base text-text-secondary-color">
+          <ul className="flex items-center gap-1 md:gap-3 ">
+            <li className="text-base text-text-secondary-color hidden sm:block">
               <b>Already Registered ?</b>
             </li>
             <Link to={'/signIn'}>

@@ -28,7 +28,7 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         className={`
-          text-lg
+          text-base
           border
           px-2 py-4 tablet:p-3 mt-2
           min-w-[250px] w-full min-h-[43px] tablet:min-h-[58px]

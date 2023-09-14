@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar categories bottom menu search />
       <Container>
         <div className="h-screen bg-slate-50 -my-10 shadow-md">
-          <img src={bg} alt="" className="w-full h-full opacity-30" />
+          <img src={bg} alt="" className="w-full h-full opacity-30 object-cover" />
         </div>
       </Container>
       <Footer />

@@ -1,23 +1,88 @@
+import { useState } from 'react';
 import { Formik, Form } from 'formik';
+import axios from 'axios';
 
+import { registerValidation } from './schemas';
 import Container from '../Container';
 import Input from './Input';
 import Button from '../Button';
-import { useState } from 'react';
-import { registerValidation } from './schemas';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../store/slices/userSlice';
 
 const SignUpModal = () => {
-  const [user, setUser] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirm_password: '',
-  });
+  const user = useSelector((state) => state.user);
+  const [error, setError] = useState(false);
+  const [sucess, setSucess] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { name, email, password, passwordConfirm } = user;
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    dispatch(setUser({ ...user, [e.target.name]: e.target.value }));
   };
-  const handleSignUp = () => {};
+
+  const handleSignUp = async () => {
+    console.log('Registering...');
+
+    //check if user exists already
+    // const existingUser = await axios
+    //   .get('http://localhost:5000/api/v1/users/email/${user.email}')
+    //   .then((res) => res.data)
+    //   .catch((err) => {
+    //     setError(true);
+    //     setSucess(false);
+    //     console.log(err);
+    //     return null;
+    //   });
+
+    // if (existingUser) {
+    //   setError(true);
+    //   setSucess(false);
+    //   console.log('User with this email already exists.');
+    //   return;
+    // }
+
+    //register new user if user doesn't exists
+    const data = await axios
+      .post('http://localhost:5000/api/v1/users/signup', {
+        name,
+        email,
+        password,
+        passwordConfirm,
+      })
+      .then((res) => {
+        setSucess(true);
+        setError(false);
+
+        //login the user
+        axios
+          .post('http://localhost:5000/api/v1/users/login', {
+            email,
+            password,
+          })
+          .then((res) => {
+            navigate('/');
+            return res;
+          })
+          .catch((err) => {
+            setError(true);
+            console.log(err);
+          });
+
+        return res.data;
+      })
+      .catch((err) => {
+        setSucess(false);
+        setError(true);
+        console.log(err);
+        return null;
+      });
+
+    console.log(data);
+  };
 
   return (
     <Container>
@@ -32,13 +97,28 @@ const SignUpModal = () => {
           >
             New User ? Register Now!
           </h3>
+          {error && (
+            <h1 className="text-red-600 font-bold bg-slate-100 px-2 py-4">
+              Register Unsucessful. Please try again!!
+            </h1>
+          )}
+          {sucess && (
+            <h1 className="text-green-600 font-bold bg-slate-100 px-2 py-4">
+              Register Sucessful. Please{' '}
+              <Link
+                to={'/signin'}
+                className="border-b-2 border-green-600 text-green-800"
+              >
+                Sign in
+              </Link>{' '}
+              to continue
+            </h1>
+          )}
           <Formik
             enableReinitialize
             initialValues={user}
             validationSchema={registerValidation}
-            onSubmit={() => {
-              handleSignUp();
-            }}
+            onSubmit={handleSignUp}
           >
             {({ errors, handleBlur, touched }) => (
               <Form>
@@ -75,14 +155,14 @@ const SignUpModal = () => {
                 <Input
                   label="Confirm Password"
                   type="password"
-                  name="confirm_password"
+                  name="passwordConfirm"
                   placeholder="Confirm your password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   errors={errors}
                   touched={touched}
                 />
-                <Button buttonText="Login" full />
+                <Button buttonText="Register" full />
               </Form>
             )}
           </Formik>
@@ -96,7 +176,9 @@ const SignUpModal = () => {
         "
       >
         <span className="cursor-pointer">Already Registered ?</span>
-        <span className="cursor-pointer text-primary-color">Sign In</span>
+        <Link to={'/signin'} className="cursor-pointer text-primary-color">
+          Sign In
+        </Link>
       </div>
     </Container>
   );

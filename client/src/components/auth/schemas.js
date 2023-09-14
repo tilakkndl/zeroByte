@@ -12,8 +12,8 @@ export const registerValidation = Yup.object({
   name: Yup.string()
     .required('Enter your fullname.')
     .min(2, 'First name must be between 2 and 16 characters.')
-    .max(16, 'First name must be between 2 and 16 characters.')
-    .matches(/^[aA-aZ]/, 'Numbers and special characters are not allowed.'),
+    .max(16, 'First name must be between 2 and 16 characters.'),
+  // .matches(/^[aA-aZ]/, 'Numbers and special characters are not allowed.'),
 
   email: Yup.string()
     .required(
@@ -23,11 +23,10 @@ export const registerValidation = Yup.object({
 
   password: Yup.string()
     .required('Please enter a password.')
-    .min(6, 'Password must be atleast 6 characters.')
+    .min(8, 'Password must be atleast 6 characters.')
     .max(36, "Password can't be more than 36 characters."),
 
-  confirm_password: Yup.string()
+  passwordConfirm: Yup.string()
     .required('Confirm your password.')
     .oneOf([Yup.ref('password')], 'Passwords must match.'),
 });
-
