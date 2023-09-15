@@ -1,8 +1,19 @@
 import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [mobileSearch, setMobileSearch] = useState(false);
+  const [query, setQuery] = useState('');
+
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+    onSearch(query);
+  };
+  console.log(query);
+
+  const handleSearch = () => {
+    onSearch(query);
+  };
 
   return (
     <>
@@ -17,6 +28,9 @@ const Search = () => {
         <div className="w-full">
           <input
             type="text"
+            placeholder="Search for a location"
+            value={query}
+            onChange={handleInputChange}
             className="
               w-full px-4 py-2 rounded-l-full text-sm md:text-lg text-text-secondary-color
             "
@@ -27,6 +41,7 @@ const Search = () => {
             p-2 md:px-4 md:py-3 
             rounded-r-full bg-secondary-color text-white
           "
+          onClick={handleSearch}
         >
           <BiSearch size={20} />
         </div>
@@ -55,10 +70,16 @@ const Search = () => {
             <div className="w-full">
               <input
                 type="text"
+                placeholder="Search for a location"
+                value={query}
+                onChange={handleInputChange}
                 className="w-full p-3 rounded-l-full text-sm md:text-lg text-text-secondary-color"
               />
             </div>
-            <div className="p-3 rounded-r-full bg-secondary-color text-white">
+            <div
+              className="p-3 rounded-r-full bg-secondary-color text-white"
+              onClick={handleSearch}
+            >
               <BiSearch size={20} />
             </div>
           </div>

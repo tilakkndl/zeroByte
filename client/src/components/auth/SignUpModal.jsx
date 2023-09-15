@@ -9,7 +9,6 @@ import Button from '../Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store/slices/userSlice';
-import { setUserInfo } from '../../store/slices/userInfoSlice';
 
 const SignUpModal = () => {
   const user = useSelector((state) => state.user);
@@ -64,8 +63,6 @@ const SignUpModal = () => {
           })
           .then((res) => {
             navigate('/');
-            const data = res.data;
-            dispatch(setUserInfo({ data }));
             return res;
           })
           .catch((err) => {

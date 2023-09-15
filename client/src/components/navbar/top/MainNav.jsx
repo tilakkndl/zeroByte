@@ -1,16 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import Logo from '../Logo';
 import NavMenu from '../NavMenu';
 import Search from '../Search';
 
-const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
+const MainNav = ({ menu, search, onSearch, secondary, signIn, signUp }) => {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-
-  const userInfo = useSelector((state) => state.userInfo);
-  console.log(userInfo);
 
   return (
     <div className="flex flex-row justify-between items-center gap-4">
@@ -21,7 +17,7 @@ const MainNav = ({ menu, search, secondary, signIn, signUp }) => {
       )}
       <Logo />
       <div className="flex-1 flex items-center gap-4 justify-end">
-        {search && <Search />}
+        {search && <Search onSearch={onSearch} />}
         {!secondary && (
           <ul className="hidden md:flex gap-3 ">
             {token && (

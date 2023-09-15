@@ -8,6 +8,7 @@ const Navbar = ({
   bottom,
   menu,
   search,
+  onSearch,
   secondary,
   signIn,
   signUp,
@@ -27,6 +28,7 @@ const Navbar = ({
         <MainNav
           menu={menu}
           search={search}
+          onSearch={onSearch}
           secondary={secondary}
           signIn={signIn}
           signUp={signUp}
