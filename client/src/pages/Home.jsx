@@ -38,6 +38,10 @@ const Home = () => {
     }
   }, [navigate, token]);
 
+  if (!token) {
+    navigate('/signin');
+  }
+
   return (
     <div>
       <Navbar categories bottom menu search onSearch={handleSearch} />
